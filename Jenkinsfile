@@ -6,14 +6,12 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
 
-        AWS_S3_BUCKET = "artifact-dotnet-dll-files"
+        AWS_S3_BUCKET = "artifact-dotnet-dll"
         ARTIFACT_NAME = "pipelines-dotnet-core.dll"
         AWS_EB_APP_NAME = "sample-dotnet-app"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "Sampledotnetapp-env"
 
-        SONAR_IP = "54.226.50.200"
-        SONAR_TOKEN = "sqp_4f4904db430aba9948fce759bbf9777998547c44"
 
     }
 
@@ -54,7 +52,7 @@ pipeline {
 
             post {
                 success {
-                    archiveArtifacts artifacts: 'bin/Debug/net6.0/pipelines-dotnet-core.dll', followSymlinks: false
+                    archiveArtifacts artifacts: 'bin/Debug/net6.0/$ARTIFACT_NAME', followSymlinks: false
        
                 }
             }
